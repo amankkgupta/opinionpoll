@@ -32,6 +32,6 @@ OpinionPoll is a full-stack web application built using the MERN stack. It allow
 - **Render**: Deployment platform for backend.
 
 ### Screenshots
-![Homepage](https://drive.google.com/file/d/1JFZe2-TtzflkQhGxh8HpN3wfnftEH0_E/view?usp=sharing)
-![Debate Page](https://drive.google.com/file/d/1b6JY5v7mrC97lDr2tVNYR74rI3JW_NwY/view?usp=sharing)
-![Admin Panel](https://drive.google.com/file/d/1moChg4IGCHCpNag93AkIVHuHN1stKdIc/view?usp=sharing)
+![Homepage](https://drive.google.com/file/d/1JFZe2-TtzflkQhGxh8HpN3wfnftEH0_E/view)
+![Debate Page](https://drive.google.com/file/d/1b6JY5v7mrC97lDr2tVNYR74rI3JW_NwY/view)
+![Admin Panel](https://drive.google.com/file/d/1moChg4IGCHCpNag93AkIVHuHN1stKdIc/view)
