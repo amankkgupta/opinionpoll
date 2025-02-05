@@ -101,11 +101,11 @@ const Verify = async (req, res) => {
       { isVerified: true }
     );
     if (user) {
-      return res.redirect("http://localhost:5173/login?status=true");
+      return res.redirect(`${FRONTEND_URL}/login?status=true`);
     }
-    return res.redirect("http://localhost:5173/login?status=false");
+    return res.redirect(`${FRONTEND_URL}/login?status=false`);
   } catch (err) {
-    return res.redirect("http://localhost:5173/login?status=false");
+    return res.redirect(`${FRONTEND_URL}/login?status=false`);
   }
 };
 

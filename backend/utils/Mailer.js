@@ -14,7 +14,7 @@ const verifyMail = async (email) => {
   try {
     const token = jwt.sign({email}, process.env.JWT_SECRET, { expiresIn: "10m" });
     //use env
-    const url = `http://localhost:3000/api/auth/register/verify?token=${token}`;
+    const url = `${process.env.BACKEND_URL}/api/auth/register/verify?token=${token}`;
     await transporter.sendMail({
       from: `"DebateHub Support" <${process.env.MAILER_EMAIL}>`,
       to: email,
@@ -34,7 +34,7 @@ const resetMail = async (email) => {
     const token = jwt.sign({ email }, process.env.JWT_SECRET, {
       expiresIn: "10m",
     });
-    const url = `http://localhost:5173/resetpassword?token=${token}`;
+    const url = `${FRONTEND_URL}/resetpassword?token=${token}`;
     await transporter.sendMail({
       from: `"DebateHub Support" <${process.env.MAILER_EMAIL}>`,
       to: email,
