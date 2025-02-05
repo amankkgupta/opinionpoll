@@ -6,7 +6,7 @@ const About = () => {
   return (
     <div className="pt-16 flex flex-col min-h-screen items-center justify-center bg-gradient-to-r from-indigo-300 via-indigo-400 to-indigo-500 p-4">
       <div className="max-w-5xl w-full">
-        <h1 className="text-3xl font-bold mb-8 text-center text-white">About DebateHub</h1>
+        <h1 className="text-3xl font-bold mb-8 text-center text-white">About OpinionPoll</h1>
         <div className="flex flex-wrap gap-5 mb-6">
           <div className="flex-1 bg-white p-6 rounded shadow-md">
             <h2 className="text-xl font-bold mb-2 text-indigo-600">Our Mission</h2>
@@ -31,7 +31,7 @@ const About = () => {
           <div className="flex-1 bg-white p-6 rounded shadow-md">
             <h2 className="text-xl font-bold mb-2 text-indigo-600">Join the Community</h2>
             <p className="text-base text-gray-700">
-              Join DebateHub today and become part of a vibrant community of thinkers, debaters, and learners. Whether you're here to share your knowledge or to learn from others, DebateHub is the place for you.
+              Join OpinionPoll today and become part of a vibrant community of thinkers, debaters, and learners. Whether you're here to share your knowledge or to learn from others, OpinionPoll is the place for you.
             </p>
             <div className="text-center">
               <button

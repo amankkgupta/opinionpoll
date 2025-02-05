@@ -22,16 +22,14 @@ function App() {
       <UserContextProvider>
         <Navbar />
         <Routes>
-          
-            <Route path="/userdebates" element={<UserAllDebates />} />
-            <Route path="/userdashboard" element={<UserDashboard />} />
-            <Route path="/voting" element={<Voting/>}/>
-            <Route path="/admindashboard" element={<AdminDashboard />} />
-            <Route path="/manageusers" element={<ManageUsers/>}/>
+          <Route path="/userdebates" element={<UserAllDebates />} />
+          <Route path="/userdashboard" element={<UserDashboard />} />
+          <Route path="/voting" element={<Voting />} />
+          <Route path="/admindashboard" element={<AdminDashboard />} />
+          <Route path="/manageusers" element={<ManageUsers />} />
 
           <Route element={<PublicProtected />}>
-            <Route path="/home" element={<Home />} />
-            <Route path="/" element={<Navigate to="/login"/>}/>
+            <Route path="/" element={<Home />} />
             <Route path="/aboutus" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

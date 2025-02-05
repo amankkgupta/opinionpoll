@@ -26,7 +26,7 @@ const Navbar = () => {
           onClick={() => (location.pathname = "/")}
           className="text-white text-xl font-bold"
         >
-          DebateHub
+          OpinionPoll
         </button>
 
         <div className="md:hidden">
@@ -102,7 +102,7 @@ const Navbar = () => {
           )}
           {!isAuth && (
             <>
-              {/* <NavLink
+              <NavLink
                 to="/"
                 className={({ isActive }) =>
                   isActive ? "bg-white rounded-xl px-3 " : "text-white"
@@ -110,7 +110,7 @@ const Navbar = () => {
                 onClick={toggleMenu}
               >
                 Home
-              </NavLink> */}
+              </NavLink>
               <NavLink
                 to="/aboutus"
                 className={({ isActive }) =>
