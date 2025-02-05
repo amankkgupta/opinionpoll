@@ -8,7 +8,7 @@ export const fetchStats = createAsyncThunk(
     console.log("in fetching");
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/admin/stats`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/admin/stats`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

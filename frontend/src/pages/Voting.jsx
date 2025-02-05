@@ -55,7 +55,7 @@ const Voting = () => {
     if (totalVotesCasted < 10) return toast.error("Please cast all 10 votes !");
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}api/debates/voterequest`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/debates/voterequest`,
         { debateId: debate._id, votes: votes },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -71,7 +71,7 @@ const Voting = () => {
   const handleClose = async (status) => {
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}api/admin/closedebate`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/admin/closedebate`,
         { debateId: debate._id, status },
         {
           headers: {
@@ -98,7 +98,7 @@ const Voting = () => {
 
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}api/admin/removeoption`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/admin/removeoption`,
         { debateId: debate._id, idx },
         {
           headers: {

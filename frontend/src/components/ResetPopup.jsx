@@ -21,7 +21,7 @@ const ResetPopup = ({ onClose }) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}api/auth/resetrequest`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/resetrequest`,
         { email, password: "" }
       );
       toast.success(res.data.message);

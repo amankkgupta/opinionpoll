@@ -7,7 +7,7 @@ export const fetchVotes = createAsyncThunk(
     const token = localStorage.getItem("token");
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}api/debates/fetchvotes/?debateId=${data}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/debates/fetchvotes/?debateId=${data}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -25,7 +25,7 @@ export const Reset = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}api/auth/resetpassword`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/resetpassword`,
         { token, password }
       );
       toast.success(res.data.message);

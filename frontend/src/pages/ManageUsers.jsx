@@ -12,7 +12,7 @@ const ManageUsers = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        "http://localhost:3000/api/admin/fetchallusers",
+        `${import.meta.env.VITE_BACKEND_URL}/api/admin/fetchallusers`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -38,7 +38,7 @@ const ManageUsers = () => {
     setIsLoading(true);
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}api/admin/blockuser`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/admin/blockuser`,
         { userEmail: users[index].email }
       );
       toast.success(res.data.message);
@@ -53,7 +53,7 @@ const ManageUsers = () => {
     setIsLoading(true);
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}api/admin/activateuser`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/admin/activateuser`,
         { userEmail: users[index].email }
       );
       toast.success(res.data.message);
