@@ -3,7 +3,7 @@
 OpinionPoll is a full-stack web application built using the MERN stack. It allows users to create and participate in debates, vote on options, and comment on ongoing discussions. The platform also includes an admin role with moderation capabilities, making it an engaging space for interactive polling and debate management.
 
 ## Live Preview
-- **Live URL**: [OpinionPoll Live](https://opinion-hub-henna.vercel.app/)
+- **Live URL**: [OpinionPoll Live](https://opinionpoll.pages.dev/)
 
 ## Features
 ### User Features
