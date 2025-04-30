@@ -22,13 +22,13 @@ const verifyMail = async (email) => {
     });
     return true;
   } catch (err) {
-    console.log("err in mailer");
+    // console.log("err in mailer");
     return false;
   }
 };
 
 const resetMail = async (email) => {
-  console.log("in mailer", email);
+  // console.log("in mailer", email);
   try {
     const token = jwt.sign({ email }, process.env.JWT_SECRET, {
       expiresIn: "10m",
@@ -42,7 +42,7 @@ const resetMail = async (email) => {
     });
     return true;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return false;
   }
 };
