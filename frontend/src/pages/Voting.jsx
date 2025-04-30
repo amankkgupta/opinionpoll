@@ -2,7 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { format } from "date-fns";
 import { Heart } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllDebates, likeRequest, setLiked } from "../redux/slices/allDebatesSlice";
+import {
+  fetchAllDebates,
+  likeRequest,
+  setLiked,
+} from "../redux/slices/allDebatesSlice";
 import { BiSolidUpvote } from "react-icons/bi";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaPlus, FaMinus } from "react-icons/fa";
@@ -23,18 +27,16 @@ import {
   YAxis,
 } from "recharts";
 import { UserContext } from "../context/UserContext";
+import CommentView from "../components/CommentView";
 
 const Voting = () => {
-  const {page, id}= useParams();
+  const { page, id } = useParams();
   console.log(page, id);
   const { role } = useContext(UserContext);
   const { debate, liked, Qno, votes, isVoted, isLoading } = useSelector(
     (states) => states.voting
   );
-  const {
-    debates,
-    likes,
-  } = useSelector((states) => states.allDebates);
+  const { debates, likes } = useSelector((states) => states.allDebates);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -50,7 +52,7 @@ const Voting = () => {
   const handleLike = (_id, index) => {
     console.log(index);
     dispatch(likeRequest(_id));
-    dispatch(setLike({act:true, liked}));
+    dispatch(setLike({ act: true, liked }));
     liked
       ? dispatch(setLiked({ index, val: -1 }))
       : dispatch(setLiked({ index, val: 1 }));
@@ -119,22 +121,21 @@ const Voting = () => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(
       fetchAllDebates({
-        page:page+1,
+        page: page + 1,
         isExact: false,
         votes: 0,
         likegt: 0,
         date: "",
-        searchQuery:"",
+        searchQuery: "",
       })
     );
-  },[])
-  // console.log(debates[page][id])
+  }, []);
 
   return (
-    <div className="pt-16 lg:p-48 p-5 flex items-center justify-center min-h-screen bg-gradient-to-r from-indigo-300 via-indigo-400 to-indigo-500">
+    <div className="pt-16 p-5 lg:px-48 flex items-start justify-start min-h-screen bg-gradient-to-r from-indigo-300 via-indigo-400 to-indigo-500">
       {!isLoading && (
         <div className=" w-full">
           <div className="flex justify-between">
@@ -282,6 +283,10 @@ const Voting = () => {
                 )}
               </div>
             </div>
+          </div>
+
+          <div>
+            <CommentView debateId={debate._id}/>
           </div>
         </div>
       )}

@@ -1,3 +1,4 @@
+const commentsModel = require("../models/commentsModel");
 const debatesModel = require("../models/debatesModel");
 const likesModel = require("../models/likesModel");
 const votesModel = require("../models/votesModel");
@@ -71,7 +72,6 @@ const MyDebates = async (req, res) => {
     debates = debates.map((debate) => {
       debate.options = debate.options.filter((option) => !option.isRemoved);
       return debate;
-      
     });
 
     res.status(200).json({ totalRecords, debates });
@@ -80,7 +80,6 @@ const MyDebates = async (req, res) => {
     res.status(400).json({ message: "Server error! Please try again later" });
   }
 };
-
 
 const CreateDebate = async (req, res) => {
   const { question, options } = req.body;
@@ -173,6 +172,42 @@ const FetchVotes = async (req, res) => {
   }
 };
 
+const AddComment = async (req, res) => {
+  const { comment, debateId } = req.body;
+  const { email } = req.user;
+  const userName = email.split("@")[0];
+  // console.log(comment, debateId, userName);
+  try {
+    if (!comment || !debateId || !userName) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+    const newComment = new commentsModel({
+      comment,
+      debateId,
+      userName,
+    });
+    await newComment.save();
+    res.status(201).json({ message: "Comment added successfully" });
+  } catch (error) {
+    console.error("Error creating comment:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const fetchComments = async (req, res) => {
+  const { debateId } = req.params
+  console.log(debateId);
+  try {
+    const comments = await commentsModel.find({ debateId, removed: false }).sort({
+      createdOn: -1,
+    });
+    res.status(200).json(comments);
+  } catch (error) {
+    console.error("Error fetching comments:", error);
+    res.status(500).json({ message: "Failed to fetch comments" });
+  }
+};
+
 module.exports = {
   AllDebates,
   CreateDebate,
@@ -180,4 +215,6 @@ module.exports = {
   LikeDebate,
   VoteDebate,
   FetchVotes,
+  AddComment,
+  fetchComments,
 };
