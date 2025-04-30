@@ -76,7 +76,7 @@ const MyDebates = async (req, res) => {
 
     res.status(200).json({ totalRecords, debates });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(400).json({ message: "Server error! Please try again later" });
   }
 };
@@ -85,7 +85,7 @@ const MyDebates = async (req, res) => {
 const CreateDebate = async (req, res) => {
   const { question, options } = req.body;
   const createdBy = req.user.email.split("@")[0];
-  console.log(createdBy);
+  // console.log(createdBy);
 
   try {
     const debateData = new debatesModel({
@@ -120,7 +120,7 @@ const LikeDebate = async (req, res) => {
     });
     res.status(200).json({ message: "disliked" });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(400).json({ message: "server error" });
   }
 };
@@ -128,7 +128,7 @@ const LikeDebate = async (req, res) => {
 const VoteDebate = async (req, res) => {
   const { debateId, votes } = req.body;
   const { userId } = req.user;
-  console.log(votes);
+  // console.log(votes);
   try {
     const debate = await debatesModel.findById(debateId);
     if (!debate) {
@@ -151,7 +151,7 @@ const VoteDebate = async (req, res) => {
     await newVote.save();
     res.status(200).json({ message: "Votes Casted Successfully !" });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(400).json({ message: "Server error" });
   }
 };
@@ -159,7 +159,7 @@ const VoteDebate = async (req, res) => {
 const FetchVotes = async (req, res) => {
   const { debateId } = req.query;
   const { userId } = req.user;
-  console.log(debateId, userId);
+  // console.log(debateId, userId);
   try {
     const vote = await votesModel.findOne({ debateId, userId });
     console.log(vote);
@@ -168,7 +168,7 @@ const FetchVotes = async (req, res) => {
     }
     res.status(200).json({ votes: vote.votes });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(400).json({ message: "Server error" });
   }
 };

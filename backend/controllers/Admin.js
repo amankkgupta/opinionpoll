@@ -101,7 +101,7 @@ const closedDebate = async (req, res) => {
 
 const removeOption = async (req, res) => {
   const { debateId, idx } = req.body;
-  console.log(idx);
+  // console.log(idx);
   try {
     const debate = await debatesModel.findById(debateId);
     if (!debate || !debate.options || !debate.options[idx]) {

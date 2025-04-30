@@ -31,7 +31,6 @@ const Login = async (req, res) => {
       }
       return;
     }
-
     const isMatch = await bcrypt.compare(password, databaseUser.password);
     if (!isMatch) {
       return res
@@ -93,7 +92,7 @@ const Register = async (req, res) => {
 
 const Verify = async (req, res) => {
   const { token } = req.query;
-  console.log(token);
+  // console.log(token);
   try {
     const decoded = await jwt.verify(token, process.env.JWT_SECRET);
     const { email } = decoded;
