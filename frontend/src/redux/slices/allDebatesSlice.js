@@ -58,7 +58,6 @@ const AllDebateSlice = createSlice({
       state.currPage = action.payload;
     },
     setLiked: (state, action) => {
-      console.log(action.payload);
       state.likes[state.currPage][action.payload.index] =
         !state.likes[state.currPage][action.payload.index];
 
@@ -87,6 +86,7 @@ const AllDebateSlice = createSlice({
         state.totalRecords = action.payload.totalRecords;
         state.totalPages = Math.ceil(state.totalRecords / 10);
         state.isLoading = false;
+        console.log(state.debates);
       })
       .addCase(fetchAllDebates.rejected, (state, action) => {
         state.errorMessage = action.payload;

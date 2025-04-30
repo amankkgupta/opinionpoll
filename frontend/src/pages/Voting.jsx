@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { format } from "date-fns";
 import { Heart } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { likeRequest, setLiked } from "../redux/slices/allDebatesSlice";
+import { fetchAllDebates, likeRequest, setLiked } from "../redux/slices/allDebatesSlice";
 import { BiSolidUpvote } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -25,10 +25,16 @@ import {
 import { UserContext } from "../context/UserContext";
 
 const Voting = () => {
+  const {page, id}= useParams();
+  console.log(page, id);
   const { role } = useContext(UserContext);
   const { debate, liked, Qno, votes, isVoted, isLoading } = useSelector(
     (states) => states.voting
   );
+  const {
+    debates,
+    likes,
+  } = useSelector((states) => states.allDebates);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -112,6 +118,20 @@ const Voting = () => {
       toast.error(err.response?.data?.message || "Error closing debate");
     }
   };
+
+  useEffect(()=>{
+    dispatch(
+      fetchAllDebates({
+        page:page+1,
+        isExact: false,
+        votes: 0,
+        likegt: 0,
+        date: "",
+        searchQuery:"",
+      })
+    );
+  },[])
+  // console.log(debates[page][id])
 
   return (
     <div className="pt-16 lg:p-48 p-5 flex items-center justify-center min-h-screen bg-gradient-to-r from-indigo-300 via-indigo-400 to-indigo-500">

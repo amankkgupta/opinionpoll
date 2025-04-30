@@ -24,7 +24,7 @@ function App() {
         <Routes>
           <Route path="/userdebates" element={<UserAllDebates />} />
           <Route path="/userdashboard" element={<UserDashboard />} />
-          <Route path="/voting" element={<Voting />} />
+          <Route path="/voting/:page/:id" element={<Voting />} />
           <Route path="/admindashboard" element={<AdminDashboard />} />
           <Route path="/manageusers" element={<ManageUsers />} />
 

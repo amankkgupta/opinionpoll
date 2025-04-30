@@ -167,6 +167,8 @@ const UserAllDebates = () => {
                   <div key={ind} className="w-full">
                     <DebateCard
                       debate={deb}
+                      currPage={currPage-1}
+                      ind={ind}
                       Qno={(currPage - 1) * 10 + ind + 1}
                       liked={likes[currPage][ind]}
                     />

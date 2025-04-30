@@ -21,7 +21,7 @@ import {
   YAxis,
 } from "recharts";
 
-const DebateCard = ({ debate, liked, Qno, isMine }) => {
+const DebateCard = ({ debate, liked, Qno, isMine, currPage, ind }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const likeBtn = useRef(null);
@@ -32,7 +32,7 @@ const DebateCard = ({ debate, liked, Qno, isMine }) => {
     dispatch(setDebate(debate));
     dispatch(setLike({act:false, liked}));
     dispatch(setQno(Qno));
-    navigate("/voting");
+    navigate(`/voting/${currPage}/${ind}`);
   };
 
   const handleLike = (_id, index) => {
@@ -44,6 +44,7 @@ const DebateCard = ({ debate, liked, Qno, isMine }) => {
 
   return (
     <div
+      key={ind}
       onClick={(e) => onCardClick(e)}
       className={`${
         isMine ? "bg-blue-600" : "bg-indigo-600"

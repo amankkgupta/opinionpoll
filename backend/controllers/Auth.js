@@ -93,6 +93,7 @@ const Register = async (req, res) => {
 
 const Verify = async (req, res) => {
   const { token } = req.query;
+  console.log(token);
   try {
     const decoded = await jwt.verify(token, process.env.JWT_SECRET);
     const { email } = decoded;
@@ -101,11 +102,11 @@ const Verify = async (req, res) => {
       { isVerified: true }
     );
     if (user) {
-      return res.redirect(`${FRONTEND_URL}/login?status=true`);
+      return res.redirect(`${process.env.FRONTEND_URL}/login?status=true`);
     }
-    return res.redirect(`${FRONTEND_URL}/login?status=false`);
+    return res.redirect(`${process.env.FRONTEND_URL}/login?status=false`);
   } catch (err) {
-    return res.redirect(`${FRONTEND_URL}/login?status=false`);
+    return res.redirect(`${process.env.FRONTEND_URL}/login?status=false`);
   }
 };
 
