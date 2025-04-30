@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { FaXmark } from "react-icons/fa6";
+import SnakeLoader from "../components/Loader";
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -73,6 +74,8 @@ const ManageUsers = () => {
     fetchUsers();
     setSearchQuery("");
   }
+
+  if(isLoading) return <SnakeLoader/>
 
   return (
     <div className="pt-16 lg:px-72 p-3 min-h-screen bg-gradient-to-r from-indigo-300 via-indigo-400 to-indigo-500">

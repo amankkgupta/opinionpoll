@@ -4,6 +4,7 @@ import DebateCard from "../components/DebateCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserDebates } from "../redux/slices/userDebateSlice";
 import PagesButton from "../components/PagesButton";
+import SnakeLoader from "../components/Loader";
 
 const UserDashboard = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const UserDashboard = () => {
   const showCreate = () => {
     setIsCreatePop(!isCreatePop);
   };
+  if(isLoading) return <SnakeLoader/>
 
   return (
     <div className="pt-16 grid lg:grid-cols-[1fr,2fr,1fr] px-5 min-h-screen bg-blue-400">

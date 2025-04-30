@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStats } from "../redux/slices/adminDashboardSlice";
 import { useNavigate } from "react-router-dom";
+import SnakeLoader from "../components/Loader";
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,8 @@ const AdminDashboard = () => {
   useEffect(() => {
     dispatch(fetchStats());
   }, []);
+  
+  if(isLoading) return <SnakeLoader/>
 
   return (
     <div className="pt-16 gap-5 flex flex-col items-center justify-start min-h-screen bg-gradient-to-r from-indigo-300 via-indigo-500 to-indigo-700">

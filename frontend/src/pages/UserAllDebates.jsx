@@ -5,6 +5,7 @@ import { fetchAllDebates, setCurrPage } from "../redux/slices/allDebatesSlice";
 import PagesButton from "../components/PagesButton";
 import { FaFilter } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import SnakeLoader from "../components/Loader";
 
 const UserAllDebates = () => {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ const UserAllDebates = () => {
       })
     );
   };
-
+  if(isLoading) return <SnakeLoader/>
   return (
     <div className="pt-16 lg:px-48 grid lg:grid-cols-[1fr,3fr] px-5 min-h-screen bg-blue-400">
       {!isLoading && (
