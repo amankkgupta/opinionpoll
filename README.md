@@ -3,7 +3,7 @@
 OpinionPoll is a full-stack web application built using the MERN stack. It allows users to create and participate in debates, vote on options, and comment on ongoing discussions. The platform also includes an admin role with moderation capabilities, making it an engaging space for interactive polling and debate management.
 
 ## Live Preview
-- **Live URL**: [OpinionPoll Live](https://opinion-hub-henna.vercel.app/)
+- **Live URL**: [OpinionPoll Live](https://opinionpoll.pages.dev/)
 
 ## Features
 ### User Features
@@ -22,16 +22,10 @@ OpinionPoll is a full-stack web application built using the MERN stack. It allow
 ### Frontend
 - **React**: For building the user interface.
 - **Tailwind CSS**: For styling the frontend.
-- **Vercel**: Deployment platform for frontend.
 
 ### Backend
 - **Node.js**: Backend runtime environment.
 - **Express.js**: Web framework for API and server-side logic.
 - **MongoDB**: Database for storing users, debates, and votes.
 - **Mongoose**: Object Data Modeling (ODM) library for MongoDB.
-- **Render**: Deployment platform for backend.
 
-### Screenshots
-![Homepage](https://drive.google.com/file/d/1JFZe2-TtzflkQhGxh8HpN3wfnftEH0_E/view)
-![Debate Page](https://drive.google.com/file/d/1b6JY5v7mrC97lDr2tVNYR74rI3JW_NwY/view)
-![Admin Panel](https://drive.google.com/file/d/1moChg4IGCHCpNag93AkIVHuHN1stKdIc/view)
