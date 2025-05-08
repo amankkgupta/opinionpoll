@@ -14,6 +14,7 @@ export const fetchVotes = createAsyncThunk(
           },
         }
       );
+      console.log(response);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -30,11 +31,14 @@ const votingSlice = createSlice({
     debate: {},
     liked: false,
     Qno: 0,
-    votes: [],
+    voteIdx: -1,
     isVoted: false,
     isLoading: true,
   },
   reducers: {
+    setVoteIdx:(state, action)=>{
+      state.voteIdx=action.payload;
+    },
     setQno: (state, action) => {
         state.Qno = action.payload;
     },
@@ -71,20 +75,15 @@ const votingSlice = createSlice({
       })
       .addCase(fetchVotes.fulfilled, (state, action) => {
         state.isLoading = false;
-        if(action.payload.votes.length === 0){
-          state.isVoted= false;
-          state.votes = new Array(state.debate.options.length).fill(0);
-          return;
-        }
-        state.votes = action.payload.votes;
-        state.isVoted = true;
+        state.voteIdx = action.payload.voteIdx;
+        state.isVoted = state.voteIdx==-1?false:true;
       })
       .addCase(fetchVotes.rejected, (state, action) => {
         state.isLoading = false;
-        state.votes = [];
+        state.voteIdx = -1;
       });
   },
 });
 
-export const { setQno, setDebate, setLike, setVotes, setDebateStatus, setDebateOptionStatus } = votingSlice.actions;
+export const { setQno, setDebate, setLike, setVotes, setVoteIdx, setDebateStatus, setDebateOptionStatus } = votingSlice.actions;
 export default votingSlice.reducer;

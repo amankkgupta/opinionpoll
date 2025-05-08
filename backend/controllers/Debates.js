@@ -125,32 +125,36 @@ const LikeDebate = async (req, res) => {
 };
 
 const VoteDebate = async (req, res) => {
-  const { debateId, votes } = req.body;
+  const { debateId, voteIdx } = req.body;
   const { userId } = req.user;
-  // console.log(votes);
+  console.log(voteIdx);
   try {
     const debate = await debatesModel.findById(debateId);
     if (!debate) {
       return res.status(400).json({ message: "Debate not found" });
     }
-    let voteIndex = 0;
-    debate.options.forEach((option, index) => {
-      if (!option.isRemoved) {
-        option.votes += votes[voteIndex];
-        voteIndex++;
-      }
-    });
-    debate.totalVotes += 10;
+    // let voteIndex = 0;
+    // debate.options.forEach((option, index) => {
+    //   if (!option.isRemoved) {
+    //     option.votes += votes[voteIndex];
+    //     voteIndex++;
+    //   }
+    // });
+    
+    
+    debate.options[voteIdx].votes+=1;
+    debate.totalVotes += 1;
+    console.log(debate);
     await debate.save();
     const newVote = new votesModel({
       userId,
       debateId,
-      votes,
+      voteIdx,
     });
     await newVote.save();
     res.status(200).json({ message: "Votes Casted Successfully !" });
   } catch (err) {
-    // console.log(err);
+    console.log(err);
     res.status(400).json({ message: "Server error" });
   }
 };
@@ -158,16 +162,16 @@ const VoteDebate = async (req, res) => {
 const FetchVotes = async (req, res) => {
   const { debateId } = req.query;
   const { userId } = req.user;
-  // console.log(debateId, userId);
+  console.log(debateId, userId);
   try {
     const vote = await votesModel.findOne({ debateId, userId });
     console.log(vote);
     if (!vote) {
-      return res.status(200).json({ votes: [] });
+      return res.status(200).json({ voteIdx: -1 });
     }
-    res.status(200).json({ votes: vote.votes });
+    res.status(200).json({ voteIdx: vote.voteIdx });
   } catch (err) {
-    // console.log(err);
+    console.log(err);
     res.status(400).json({ message: "Server error" });
   }
 };

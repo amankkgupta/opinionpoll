@@ -9,14 +9,14 @@ import {
 } from "../redux/slices/allDebatesSlice";
 import { BiSolidUpvote } from "react-icons/bi";
 import { useNavigate, useParams } from "react-router-dom";
-import { FaPlus, FaMinus } from "react-icons/fa";
+// import { FaPlus, FaMinus } from "react-icons/fa";
 import { toast } from "react-toastify";
 import axios from "axios";
 import {
   setDebateOptionStatus,
   setDebateStatus,
   setLike,
-  setVotes,
+  setVoteIdx,
 } from "../redux/slices/votingSlice";
 import {
   ResponsiveContainer,
@@ -31,22 +31,17 @@ import CommentView from "../components/CommentView";
 
 const Voting = () => {
   const { page, id } = useParams();
-  console.log(page, id);
+  // console.log(page, id);
   const { role } = useContext(UserContext);
-  const { debate, liked, Qno, votes, isVoted, isLoading } = useSelector(
+  const { debate, liked, Qno, voteIdx, isVoted, isLoading } = useSelector(
     (states) => states.voting
   );
   const { debates, likes } = useSelector((states) => states.allDebates);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleVote = (index, val) => {
-    if (val == "") return;
-    let totalVotesCasted = votes.reduce((acc, curr) => acc + curr, 0);
-    if (totalVotesCasted >= 10 && val === 1)
-      return toast.error("10 votes already distributed !");
-    if (votes[index] === 0 && val === -1) return;
-    dispatch(setVotes({ index, val }));
+  const handleVote = (index) => {
+    dispatch(setVoteIdx(index));
   };
 
   const handleLike = (_id, index) => {
@@ -59,12 +54,11 @@ const Voting = () => {
   };
 
   const handleSubmission = async () => {
-    let totalVotesCasted = votes.reduce((acc, curr) => acc + curr, 0);
-    if (totalVotesCasted < 10) return toast.error("Please cast all 10 votes !");
+    if (voteIdx == -1) return toast.error("Please choose an option !");
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/debates/voterequest`,
-        { debateId: debate._id, votes: votes },
+        { debateId: debate._id, voteIdx },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -201,9 +195,14 @@ const Voting = () => {
                   return (
                     <div
                       key={ind}
-                      className="option w-full font-bold flex justify-between py-1 items-center gap-2"
+                      className={`option w-full font-bold flex justify-between py-1 items-center gap-2`}
                     >
-                      <div className="w-full bg-blue-400 rounded-lg px-2 flex gap-3 flex-wrap justify-between items-center">
+                      <div
+                        onClick={() => handleVote(ind)}
+                        className={`${
+                          voteIdx == ind ? "bg-emerald-500" : ""
+                        } w-full bg-blue-400 rounded-lg px-2 flex gap-3 flex-wrap justify-between items-center`}
+                      >
                         <h1 key={ind}>{`${ind + 1}. ${option.answer}`}</h1>
                         <button
                           className={`flex gap-2 justify-center font-bold items-center`}
@@ -214,26 +213,26 @@ const Voting = () => {
                       </div>
 
                       {role == "user" ? (
-                        <div className="flex justify-center items-center gap-1 md:ml-10">
-                          <button
-                            disabled={isVoted}
-                            onClick={() => handleVote(ind, -1)}
-                            className="p-2 rounded-full bg-violet-500"
-                          >
-                            <FaMinus size={16} />
-                          </button>
-                          <h1 className="px-5 py-1 bg-blue-600 rounded-xl">
-                            {votes[ind]}
-                          </h1>
-                          {/* <input type="number" value={vote[ind]} onChange={(e)=>handleVote(ind, e.target.value)} min="0" max="10" className="p-1 text-center rounded-lg text-black" /> */}
-                          <button
-                            onClick={() => handleVote(ind, 1)}
-                            className="p-2 rounded-full bg-violet-500"
-                          >
-                            <FaPlus size={16} />
-                          </button>
-                        </div>
+                        <div></div>
                       ) : (
+                        // <div className="flex justify-center items-center gap-1 md:ml-10">
+                        //   <button
+                        //     disabled={isVoted}
+                        //     onClick={() => handleVote(ind, -1)}
+                        //     className="p-2 rounded-full bg-violet-500"
+                        //   >
+                        //     <FaMinus size={16} />
+                        //   </button>
+                        //   <h1 className="px-5 py-1 bg-blue-600 rounded-xl">
+                        //     {votes[ind]}
+                        //   </h1>
+                        //   <button
+                        //     onClick={() => handleVote(ind, 1)}
+                        //     className="p-2 rounded-full bg-violet-500"
+                        //   >
+                        //     <FaPlus size={16} />
+                        //   </button>
+                        // </div>
                         <div>
                           {!option.isRemoved ? (
                             <button
@@ -286,7 +285,7 @@ const Voting = () => {
           </div>
 
           <div>
-            <CommentView debateId={debate._id}/>
+            <CommentView debateId={debate._id} />
           </div>
         </div>
       )}
