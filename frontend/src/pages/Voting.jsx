@@ -41,6 +41,7 @@ const Voting = () => {
   const navigate = useNavigate();
 
   const handleVote = (index) => {
+    if(index<0) return toast.warning("Please select your choice !");
     dispatch(setVoteIdx(index));
   };
 
