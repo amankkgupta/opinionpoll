@@ -72,10 +72,12 @@ const Register = async (req, res) => {
       const newUser = new userModel({
         email,
         password: hashedPassword,
+        isVerified: true
       });
       await newUser.save();
     }
-    const send = await verifyMail(email);
+    // const send = await verifyMail(email);
+    return res.status(200).json({message : "Registered successfully !"});
     if (send) {
       res
         .status(201)
@@ -173,3 +175,4 @@ module.exports = {
   ResetRequest,
   AuthCheck,
 };
+
