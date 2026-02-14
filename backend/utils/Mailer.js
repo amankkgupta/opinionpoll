@@ -18,11 +18,11 @@ const verifyMail = async (email) => {
       from: `"DebateHub Support" <${process.env.MAILER_EMAIL}>`,
       to: email,
       subject: "Verify your email",
-      html: `<a href=${url}>Click here<a/> to verify your email. Verification link will be expire in 10 minutes.`,
+      html: `<a href=${url}>Click here</a> to verify your email. Verification link will be expire in 10 minutes.`,
     });
     return true;
   } catch (err) {
-    // console.log("err in mailer");
+    console.log("err in mailer ${err}");
     return false;
   }
 };
@@ -48,3 +48,4 @@ const resetMail = async (email) => {
 };
 
 module.exports = { verifyMail, resetMail };
+
