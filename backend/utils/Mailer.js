@@ -11,7 +11,7 @@ const verifyMail = async (email) => {
     const url = `${process.env.BACKEND_URL}/api/auth/register/verify?token=${token}`;
 
     await resend.emails.send({
-      from: "DebateHub Support <onboarding@resend.dev>", // temporary sender
+      from: "DebateHub Support <pg65734@gmail.com>", // temporary sender
       to: email,
       subject: "Verify your email",
       html: `<a href="${url}">Click here</a> to verify your email. Verification link expires in 10 minutes.`,
@@ -34,7 +34,7 @@ const resetMail = async (email) => {
     const url = `${process.env.FRONTEND_URL}/resetpassword?token=${token}`;
 
     await resend.emails.send({
-      from: "DebateHub Support <onboarding@resend.dev>",
+      from: "DebateHub Support <pg65734@gmail.com>",
       to: email,
       subject: "Reset your password",
       html: `
@@ -56,6 +56,7 @@ const resetMail = async (email) => {
 
 
 module.exports = { verifyMail, resetMail };
+
 
 
 
