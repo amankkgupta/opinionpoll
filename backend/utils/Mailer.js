@@ -22,7 +22,7 @@ const verifyMail = async (email) => {
     });
     return true;
   } catch (err) {
-    console.log("err in mailer ${err}");
+    console.log("err in mailer", err);
     return false;
   }
 };
@@ -48,4 +48,5 @@ const resetMail = async (email) => {
 };
 
 module.exports = { verifyMail, resetMail };
+
 
