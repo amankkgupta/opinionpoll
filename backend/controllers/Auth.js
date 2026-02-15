@@ -77,7 +77,7 @@ const Register = async (req, res) => {
       await newUser.save();
     }
     // const send = await verifyMail(email);
-    return res.status(200).json({message : "Registered successfully !"});
+    return res.status(201).json({message : "Registered successfully !"});
     if (send) {
       res
         .status(201)
@@ -175,4 +175,5 @@ module.exports = {
   ResetRequest,
   AuthCheck,
 };
+
 
